@@ -1,5 +1,6 @@
 require 'gosu'
 require_relative 'car.rb'
+require_relative 'track.rb'
 
 class Window < Gosu::Window
   def initialize
@@ -15,10 +16,11 @@ class Window < Gosu::Window
   end
   
   def draw
+    Track.draw
+
     cars.each do |car|
       car.draw
-    end
-    Gosu.draw_rect(0, 0, 1000, 1000, Gosu::Color::BLUE)
+    end    
   end
 
   private
