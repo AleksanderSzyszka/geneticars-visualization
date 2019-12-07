@@ -4,7 +4,7 @@ require 'pry'
 
 class Car
   ONE_DEGREE_IN_RADIAN = 0.01745
-  FORWARD_INCREMENTATION = 5
+  MOVE_FORCE = 10
 
   attr_reader :x, :y, :width, :height, :id, :dna, :crashed, :distance
 
@@ -22,9 +22,9 @@ class Car
   def move(angle, direction)
     return if @crashed
 
-    @x = @x + (FORWARD_INCREMENTATION * Math.tan(ONE_DEGREE_IN_RADIAN * angle)) * direction
-    @y -= FORWARD_INCREMENTATION
-    @distance += FORWARD_INCREMENTATION
+    @x = @x + (MOVE_FORCE * Math.tan(ONE_DEGREE_IN_RADIAN * angle)) * direction
+    @y -= MOVE_FORCE
+    @distance += MOVE_FORCE
     colision_detection
   end
 
@@ -33,7 +33,7 @@ class Car
   end
 
   def colision_detection
-    @crashed = Track.elements_cords.any? do |cords|
+    @crashed = HardTrack.elements_cords.any? do |cords|
       x > cords[0] && x < cords[1] && y > cords[2] && y < cords[3]
     end
   end

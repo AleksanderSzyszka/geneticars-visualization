@@ -1,6 +1,7 @@
 require 'gosu'
 require_relative 'car.rb'
 require_relative 'track.rb'
+require_relative 'hard_track.rb'
 require_relative 'population.rb'
 require 'pry'
 
@@ -15,11 +16,10 @@ class Window < Gosu::Window
   def update
     @simulationTicker += 1
     if finito?
-      @cars = Population.generate_new_population(cars)
+      @cars = Population.generate_new_population(@cars)
       @simulationTicker = 1
     end
 
-    puts "TICKER #{@simulationTicker}"
     cars.each do |car|
       chromosome = car.dna[@simulationTicker]
       angle = chromosome.abs
@@ -29,7 +29,7 @@ class Window < Gosu::Window
   end
   
   def draw
-    Track.draw
+    HardTrack.draw
 
     cars.each do |car|
       car.draw
