@@ -11,8 +11,8 @@ class Car
   def initialize(id:, dna:)
     @id = id
     @dna = dna
-    @x = 2000
-    @y = 1800
+    @x = 2500
+    @y = 4800
     @width = 30
     @height = 30
     @crashed = false

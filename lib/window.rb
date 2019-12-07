@@ -6,7 +6,7 @@ require 'pry'
 
 class Window < Gosu::Window
   def initialize
-    super 4000, 2000
+    super 5000, 5000
     self.caption = 'Geneticars'
     @cars = Population.fetch
     @simulationTicker = 0
@@ -14,6 +14,7 @@ class Window < Gosu::Window
   
   def update
     @simulationTicker += 1
+    puts @simulationTicker
     puts 'FINITO' if @simulationTicker >= 998
 
     cars.each do |car|
