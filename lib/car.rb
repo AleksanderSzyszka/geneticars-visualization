@@ -6,7 +6,7 @@ class Car
   ONE_DEGREE_IN_RADIAN = 0.01745
   FORWARD_INCREMENTATION = 5
 
-  attr_reader :x, :y, :width, :height, :id, :dna
+  attr_reader :x, :y, :width, :height, :id, :dna, :crashed, :distance
 
   def initialize(id:, dna:)
     @id = id
@@ -16,6 +16,7 @@ class Car
     @width = 30
     @height = 30
     @crashed = false
+    @distance = 0
   end
 
   def move(angle, direction)
@@ -23,6 +24,7 @@ class Car
 
     @x = @x + (FORWARD_INCREMENTATION * Math.tan(ONE_DEGREE_IN_RADIAN * angle)) * direction
     @y -= FORWARD_INCREMENTATION
+    @distance += FORWARD_INCREMENTATION
     colision_detection
   end
 

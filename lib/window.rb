@@ -14,12 +14,15 @@ class Window < Gosu::Window
   
   def update
     @simulationTicker += 1
-    puts @simulationTicker
-    puts 'FINITO' if @simulationTicker >= 998
+    if finito?
+      @cars = Population.generate_new_population(cars)
+      @simulationTicker = 1
+    end
 
+    puts "TICKER #{@simulationTicker}"
     cars.each do |car|
       chromosome = car.dna[@simulationTicker]
-      angle = convert_to_angle(chromosome)
+      angle = chromosome.abs
       direction = chromosome > 0 ? 1 : -1
       car.move(angle, direction)
     end
@@ -37,10 +40,7 @@ class Window < Gosu::Window
 
   attr_reader :cars
 
-  def convert_to_angle(value)
-    value = value.abs
-    return 80 if value > 0.5
-    return 60 if value > 0.3
-    return 0
+  def finito?
+    cars.all? { |car| car.crashed } || @simulationTicker == 999
   end
 end
